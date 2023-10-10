@@ -30,6 +30,7 @@ class _HomeLayoutState extends State<HomeLayout> {
     return Container(
         decoration: const BoxDecoration(
             image: DecorationImage(
+                fit: BoxFit.cover,
                 image: AssetImage("Assets/images/Light_background.png"))),
         child: Scaffold(
             appBar: AppBar(

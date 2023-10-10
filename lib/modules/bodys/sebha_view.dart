@@ -49,7 +49,7 @@ class _SebhaViewState extends State<SebhaView> {
               height: 80,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
-                color: Theme.of(context).primaryColor,
+                color: theme.primaryColor,
               ),
               child: Center(
                 child: Text(
@@ -78,7 +78,7 @@ class _SebhaViewState extends State<SebhaView> {
                     padding: EdgeInsets.all(10),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(50),
-                      color: Theme.of(context).primaryColor,
+                      color: theme.primaryColor,
                     ),
                     height: 61,
                     child: Center(

@@ -1,16 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:my_islami_app/modules/bodys/quran_view.dart';
 
-class QuranDetailsView extends StatelessWidget {
+class QuranDetailsView extends StatefulWidget {
   static const String routeName = "Quran_view_details";
 
-  const QuranDetailsView({super.key});
+  QuranDetailsView({super.key});
+
+  @override
+  State<QuranDetailsView> createState() => _QuranDetailsViewState();
+}
+
+class _QuranDetailsViewState extends State<QuranDetailsView> {
+  String contant = "";
+  List<String> allVerses = [];
 
   @override
   Widget build(BuildContext context) {
+    var args = ModalRoute.of(context)?.settings.arguments as SuraDetails;
+    if (contant.isEmpty) readFIles(args.suraNumper);
     var theme = Theme.of(context);
     return Container(
         decoration: const BoxDecoration(
             image: DecorationImage(
+                fit: BoxFit.cover,
                 image: AssetImage("Assets/images/Light_background.png"))),
         child: Scaffold(
             appBar: AppBar(
@@ -34,11 +47,11 @@ class QuranDetailsView extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            "SuraName",
+                            args.suraName,
                             style: theme.textTheme.bodyLarge,
                           ),
                           SizedBox(
-                            width: 4,
+                            width: 20,
                           ),
                           Icon(Icons.play_circle, size: 32, color: Colors.black)
                         ],
@@ -49,8 +62,25 @@ class QuranDetailsView extends StatelessWidget {
                         indent: 30,
                         thickness: 1.2,
                       ),
-                      Text("dwasdwadsadwadadawasdadwadsadwasdawdasdasdasdwasad",
-                          style: theme.textTheme.bodySmall),
+                      Expanded(
+                        child: ListView.builder(
+                          itemBuilder: (context, index) => Text(
+                            "$contant",
+                            style: theme.textTheme.bodySmall,
+                            textAlign: TextAlign.center,
+                          ),
+                          itemCount: 1,
+                        ),
+                      )
                     ]))));
+  }
+
+  readFIles(String index) async {
+    String text = await rootBundle.loadString("Assets/Files/$index.txt");
+    contant = text;
+    setState(() {
+      allVerses = contant.split('\n');
+    });
+    print(contant);
   }
 }
